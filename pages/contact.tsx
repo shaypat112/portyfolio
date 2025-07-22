@@ -54,13 +54,54 @@ export default function Contact() {
 
           <button
             type="submit"
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-md transition"
+            className="
+              w-full
+              bg-purple-700
+              text-white
+              font-semibold
+              py-3
+              rounded-md
+              relative
+              overflow-hidden
+              transition
+              duration-300
+              hover:bg-purple-800
+              hover:scale-105
+              hover:shadow-[0_0_15px_rgba(139,92,246,0.7)]
+              focus:outline-none
+              focus:ring-4
+              focus:ring-purple-400
+              before:absolute
+              before:-inset-1
+              before:rounded-md
+              before:border-2
+              before:border-purple-400
+              before:animate-pulse
+              before:pointer-events-none
+              flex
+              justify-center
+              items-center
+              gap-2
+            "
           >
             Send Message
+            <span
+              aria-hidden="true"
+              className="inline-block animate-fly ml-2"
+              style={{ display: 'inline-block' }}
+            >
+              📨
+            </span>
           </button>
 
           {status && <p className="mt-4 text-center text-green-400">{status}</p>}
         </form>
+
+        {/* Contact info below form */}
+        <div className="mt-10 text-center space-y-2 text-gray-300 max-w-md">
+          <p>Email: <a href="mailto:shivangpatel2050@gmail.com" className="text-purple-400 hover:underline">shivangpatel2050@gmail.com</a></p>
+          <p>Phone: <a href="tel:+19802011576" className="text-purple-400 hover:underline">980-201-1576</a></p>
+        </div>
       </main>
     </>
   )

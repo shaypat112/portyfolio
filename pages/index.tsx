@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Navbar from '../components/Navbar'
 import Typewriter from '../components/Typewriter'
 import Link from 'next/link'
 
@@ -11,15 +10,13 @@ export default function Home() {
         <meta name="description" content="Shivang Patel&apos;s portfolio website" />
       </Head>
 
-      <Navbar />
-
       <main className="min-h-screen bg-gradient-to-tr from-gray-900 via-black to-gray-800 text-gray-100 flex flex-col justify-center items-center px-6">
         <h1 className="text-5xl font-bold text-purple-400 mb-4 text-center">
           <Typewriter words={['Shivang Patel', 'Student Athlete.', 'Engineer.', 'Collaborator.']} />
         </h1>
 
         <h2 className="text-center text-lg text-gray-300 max-w-2xl underline mb-8">
-          Welcome
+          
         </h2>
 
         <div className="mt-8 flex flex-col items-center gap-4">

@@ -29,6 +29,9 @@ export default function Navbar() {
           <Link href="/projects">Skills & Awards</Link>
         </li>
         <li className="hover:text-purple-400 transition">
+          <Link href="/work">Projects</Link>
+        </li>
+        <li className="hover:text-purple-400 transition">
           <Link href="/contact">Contact</Link>
         </li>
       </ul>
@@ -55,9 +58,13 @@ export default function Navbar() {
           <Link href="/projects">Skills & Awards</Link>
         </li>
         <li className="hover:text-purple-400 transition">
+          <Link href="/work">Projects</Link>
+        </li>
+        <li className="hover:text-purple-400 transition">
           <Link href="/contact">Contact</Link>
         </li>
       </ul>
     </nav>
   )
 }
+
