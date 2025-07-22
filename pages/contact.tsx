@@ -1,93 +1,81 @@
-import { useState } from 'react';
-import Navbar from '../components/Navbar';
+import Head from 'next/head'
+import { useState, useRef } from 'react'
+import emailjs from '@emailjs/browser'
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const formRef = useRef<HTMLFormElement>(null)
+  const [status, setStatus] = useState('')
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!formRef.current) return
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const encodedData = new URLSearchParams({
-      'form-name': 'contact',
-      name: form.name,
-      email: form.email,
-      message: form.message,
-    });
-
-    try {
-      await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encodedData.toString(),
-      });
-      alert('Message sent!');
-      setForm({ name: '', email: '', message: '' });
-    } catch (error) {
-      alert('Failed to send message');
-    }
-  };
+    emailjs.sendForm(
+      'YOUR_SERVICE_ID',      // Replace with your EmailJS service ID
+      'YOUR_TEMPLATE_ID',     // Replace with your EmailJS template ID
+      formRef.current,
+      'YOUR_USER_ID'          // Replace with your EmailJS user ID (public key)
+    )
+    .then(() => {
+      setStatus('Thanks for your message! I will get back to you soon.')
+      formRef.current?.reset()
+    }, () => {
+      setStatus('Oops! Something went wrong. Please try again later.')
+    })
+  }
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <Navbar />
-      <div className="pt-28 max-w-2xl mx-auto px-6">
-        <h1 className="text-4xl font-bold mb-6 text-purple-400">Contact Me</h1>
+    <>
+      <Head>
+        <title>Contact Me | Shivang Patel</title>
+        <meta name="description" content="Contact Shivang Patel" />
+      </Head>
+
+      <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-100 flex flex-col items-center justify-center px-6 py-12">
+        <h1 className="text-4xl font-bold text-purple-400 mb-8">Contact Me</h1>
+
         <form
-          onSubmit={handleSubmit}
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          className="space-y-6"
+          ref={formRef}
+          onSubmit={sendEmail}
+          className="w-full max-w-md bg-gray-800 rounded-xl p-8 shadow-lg"
         >
-          <input type="hidden" name="form-name" value="contact" />
-          <div>
-            <label htmlFor="name" className="block mb-1">Name</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              onChange={handleChange}
-              value={form.name}
-              required
-              className="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-purple-400"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block mb-1">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              onChange={handleChange}
-              value={form.email}
-              required
-              className="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-purple-400"
-            />
-          </div>
-          <div>
-            <label htmlFor="message" className="block mb-1">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows={5}
-              onChange={handleChange}
-              value={form.message}
-              required
-              className="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-purple-400"
-            />
-          </div>
+          <label htmlFor="name" className="block mb-2 font-semibold">Name</label>
+          <input
+            id="name"
+            name="user_name"
+            type="text"
+            required
+            className="w-full mb-6 px-3 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:border-purple-500"
+          />
+
+          <label htmlFor="email" className="block mb-2 font-semibold">Email</label>
+          <input
+            id="email"
+            name="user_email"
+            type="email"
+            required
+            className="w-full mb-6 px-3 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:border-purple-500"
+          />
+
+          <label htmlFor="message" className="block mb-2 font-semibold">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows={5}
+            required
+            className="w-full mb-6 px-3 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:border-purple-500"
+          />
+
           <button
             type="submit"
-            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 transition rounded text-white font-semibold"
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-md transition"
           >
             Send Message
           </button>
+
+          {status && <p className="mt-4 text-center text-green-400">{status}</p>}
         </form>
-      </div>
-    </div>
-  );
+      </main>
+    </>
+  )
 }

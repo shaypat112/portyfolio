@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Navbar from '../components/Navbar'
 import { FaMedal, FaLaptopCode, FaCertificate, FaLanguage, FaTools } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 
@@ -27,8 +26,6 @@ export default function AwardsSkills() {
         <title>Awards & Skills | Shivang Patel</title>
         <meta name="description" content="Achievements, certifications, and skills of Shivang Patel." />
       </Head>
-
-      <Navbar />
 
       <main className="min-h-screen px-6 py-12 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-100">
         <h1 className="text-4xl font-bold mb-12 text-center text-purple-400">🏆 Awards & Skills</h1>

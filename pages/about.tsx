@@ -1,45 +1,85 @@
-import Head from 'next/head'
-import Navbar from '../components/Navbar'
+// pages/about.tsx
+import Head from "next/head";
+import Link from "next/link";
 
 export default function About() {
   return (
     <>
       <Head>
-        <title>About Me | Shivang Patel</title>
-        <meta name="description" content="Learn more about Shivang Patel." />
+        <title>About Me | Portyfolio</title>
+        <meta name="description" content="About me page" />
       </Head>
 
-      <Navbar />
+      {/* Navbar */}
+      <nav className="bg-black border-b border-gray-800 p-4 fixed w-full top-0 z-50">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <Link href="/">
+            <span className="text-white font-bold text-xl cursor-pointer">
+              Portyfolio
+            </span>
+          </Link>
+          <div className="space-x-6 text-gray-300 text-sm font-medium">
+            <Link href="/">Home</Link>
+            <Link href="/about">About</Link>
+            <Link href="/projects">Projects</Link>
+            <Link href="/contact">Contact</Link>
+          </div>
+        </div>
+      </nav>
 
-      <main className="min-h-screen bg-gray-900 text-gray-100 px-6 py-16 max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-12">
-        <section className="flex-shrink-0">
-          <img
-            src="/profile-photo.jpg"
-            alt="Shivang Patel"
-            className="rounded-full w-56 h-56 object-cover shadow-2xl border-4 border-purple-600"
-          />
-        </section>
+      {/* Main Content with Gradient and Abstract Shapes */}
+      <main className="bg-gradient-to-tr from-gray-900 via-black to-gray-800 text-white pt-28 px-6 md:px-20 min-h-screen relative overflow-hidden">
+        <div className="relative w-full h-full">
+          {/* Blurred purple circle */}
+          <div className="absolute top-10 left-10 w-72 h-72 bg-purple-700 rounded-full opacity-20 filter blur-3xl -z-10"></div>
 
-        <section className="max-w-xl space-y-6">
-          <h1 className="text-5xl font-extrabold text-purple-400">About Me</h1>
+          {/* Blurred pink circle */}
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-pink-600 rounded-full opacity-15 filter blur-4xl -z-10"></div>
 
-          <p className="text-lg leading-relaxed">
-            Hi! I&apos;m <strong>Shivang Patel</strong>, a passionate high school student and developer who loves coding, data science, and leadership.
-          </p>
+          {/* About Section */}
+          <section className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-center relative z-10">
+            {/* Left: Profile Photo */}
+            <div className="md:w-1/2">
+              <img
+                src="/shivang.jpg"
+                alt="Shivang Patel"
+                className="rounded-2xl shadow-xl object-cover w-full max-h-[450px]"
+              />
+            </div>
 
-          <p className="text-lg leading-relaxed">
-            Currently, I&apos;m the <strong>President of Project UCode NC</strong>, where I lead coding workshops and mentor aspiring programmers.
-          </p>
-
-          <p className="text-lg leading-relaxed">
-            Outside of coding, I&apos;m a competitive track athlete and a proud member of NJHS and several STEM clubs.
-          </p>
-
-          <p className="text-lg leading-relaxed">
-            I&apos;m always eager to learn new technologies and collaborate on projects that can make a difference.
-          </p>
-        </section>
+            {/* Right: About Text */}
+            <div className="md:w-1/2">
+              <h1 className="text-4xl font-extrabold text-purple-500 mb-6">
+                Hey, I'm Shivang 👋
+              </h1>
+              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+                I'm a student developer who loves building web apps, learning new
+                frameworks, and solving real-world problems through code. From
+                React and TypeScript to Prisma and Python, I enjoy working across
+                the full stack.
+                <br />
+                <br />
+                I’m currently running my own coding club, building projects,
+                exploring tech internships, and helping others learn to code.
+              </p>
+              <div className="flex space-x-6">
+                <Link
+                  href="/resume.pdf"
+                  className="bg-purple-600 hover:bg-purple-700 transition px-6 py-3 rounded-lg font-semibold"
+                >
+                  View Résumé
+                </Link>
+                <Link
+                  href="/contact"
+                  className="border border-purple-500 hover:bg-purple-500 transition px-6 py-3 rounded-lg font-semibold"
+                >
+                  Contact Me
+                </Link>
+              </div>
+            </div>
+          </section>
+        </div>
       </main>
     </>
-  )
+  );
 }
