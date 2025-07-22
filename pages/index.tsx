@@ -1,25 +1,26 @@
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
-import Typewriter from '../components/Typewriter'  // import the new component
+import Typewriter from '../components/Typewriter'
+import Link from 'next/link'
 
 export default function Home() {
   return (
     <>
       <Head>
         <title>Shivang Patel | Portfolio</title>
-        <meta name="description" content="Shivang Patel's portfolio website" />
+        <meta name="description" content="Shivang Patel&apos;s portfolio website" />
       </Head>
 
       <Navbar />
 
       <main className="min-h-screen bg-gradient-to-tr from-gray-900 via-black to-gray-800 text-gray-100 flex flex-col justify-center items-center px-6">
-        <h1 className="mb-4 text-center">
-          <Typewriter words={[' Shivang Patel', 'Student Athlete.', 'Engineer.', 'Collaborator.']} />
+        <h1 className="text-5xl font-bold text-purple-400 mb-4 text-center">
+          <Typewriter words={['Shivang Patel', 'Student Athlete.', 'Engineer.', 'Collaborator.']} />
         </h1>
 
-        <p className="text-center text-lg text-gray-300 max-w-2xl">
-        <h2> <u> Welcome </u></h2>
-        </p>
+        <h2 className="text-center text-lg text-gray-300 max-w-2xl underline mb-8">
+          Welcome
+        </h2>
 
         <div className="mt-8 flex flex-col items-center gap-4">
           <a
@@ -30,12 +31,12 @@ export default function Home() {
             📄 Download Résumé
           </a>
 
-          <a
+          <Link
             href="/projects"
             className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-6 rounded-xl transition shadow-lg"
           >
             View My Skills & Awards
-          </a>
+          </Link>
         </div>
       </main>
     </>

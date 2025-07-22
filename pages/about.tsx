@@ -50,10 +50,10 @@ export default function About() {
             {/* Right: About Text */}
             <div className="md:w-1/2">
               <h1 className="text-4xl font-extrabold text-purple-500 mb-6">
-                Hey, I'm Shivang 👋
+                Hey, I am Shivang 👋
               </h1>
               <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                I'm a student developer who loves building web apps, learning new
+                I am a student developer who loves building web apps, learning new
                 frameworks, and solving real-world problems through code. From
                 React and TypeScript to Prisma and Python, I enjoy working across
                 the full stack.

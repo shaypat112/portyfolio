@@ -1,27 +1,14 @@
 import Head from 'next/head'
-import { useState, useRef } from 'react'
-import emailjs from '@emailjs/browser'
+import { useState } from 'react'
 
 export default function Contact() {
-  const formRef = useRef<HTMLFormElement>(null)
   const [status, setStatus] = useState('')
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!formRef.current) return
-
-    emailjs.sendForm(
-      'YOUR_SERVICE_ID',      // Replace with your EmailJS service ID
-      'YOUR_TEMPLATE_ID',     // Replace with your EmailJS template ID
-      formRef.current,
-      'YOUR_USER_ID'          // Replace with your EmailJS user ID (public key)
-    )
-    .then(() => {
-      setStatus('Thanks for your message! I will get back to you soon.')
-      formRef.current?.reset()
-    }, () => {
-      setStatus('Oops! Something went wrong. Please try again later.')
-    })
+    // For now, just show a thank you message on submit, no email sent
+    setStatus('Thanks for your message! (Email sending disabled)')
+    e.currentTarget.reset()
   }
 
   return (
@@ -35,8 +22,7 @@ export default function Contact() {
         <h1 className="text-4xl font-bold text-purple-400 mb-8">Contact Me</h1>
 
         <form
-          ref={formRef}
-          onSubmit={sendEmail}
+          onSubmit={handleSubmit}
           className="w-full max-w-md bg-gray-800 rounded-xl p-8 shadow-lg"
         >
           <label htmlFor="name" className="block mb-2 font-semibold">Name</label>
