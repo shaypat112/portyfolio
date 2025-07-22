@@ -1,18 +1,19 @@
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
+import Link from 'next/link'
 
 export default function Home() {
   return (
     <>
       <Head>
         <title>Shivang Patel | Portfolio</title>
-        <meta name="description" content="Shivang Patel's portfolio website" />
+        <meta name="description" content="Shivang Patel&apos;s portfolio website" />
       </Head>
 
       <Navbar />
 
       <main className="min-h-screen bg-gradient-to-tr from-gray-900 via-black to-gray-800 text-gray-100 flex flex-col justify-center items-center px-6">
-        <h1 className="text-5xl font-bold text-purple-400 mb-4 text-center">👋 Hi, I'm Shivang</h1>
+        <h1 className="text-5xl font-bold text-purple-400 mb-4 text-center">👋 Hi, I&apos;m Shivang</h1>
         <p className="text-center text-lg text-gray-300 max-w-2xl">
           Student Athlete. Engineer. Collaborator
         </p>
@@ -26,12 +27,11 @@ export default function Home() {
             📄 Download Résumé
           </a>
 
-          <a
-            href="/projects"
-            className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-6 rounded-xl transition shadow-lg"
-          >
-            View My Skills & Awards
-          </a>
+          <Link href="/projects" legacyBehavior>
+            <a className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-6 rounded-xl transition shadow-lg">
+              View My Skills & Awards
+            </a>
+          </Link>
         </div>
       </main>
     </>
