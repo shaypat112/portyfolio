@@ -1,89 +1,93 @@
-import Head from 'next/head'
-import Navbar from '../components/Navbar'
-import { useState } from 'react'
+import { useState } from 'react';
+import Navbar from '../components/Navbar';
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false)
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const encodedData = new URLSearchParams({
+      'form-name': 'contact',
+      name: form.name,
+      email: form.email,
+      message: form.message,
+    });
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodedData.toString(),
+      });
+      alert('Message sent!');
+      setForm({ name: '', email: '', message: '' });
+    } catch (error) {
+      alert('Failed to send message');
+    }
+  };
 
   return (
-    <>
-      <Head>
-        <title>Contact Me | Shivang Patel</title>
-        <meta name="description" content="Get in touch with Shivang Patel." />
-      </Head>
-
+    <div className="min-h-screen bg-black text-white">
       <Navbar />
-
-      <main className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center justify-center p-6">
+      <div className="pt-28 max-w-2xl mx-auto px-6">
         <h1 className="text-4xl font-bold mb-6 text-purple-400">Contact Me</h1>
-
-        {!submitted ? (
-          <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            onSubmit={(e) => {
-              e.preventDefault()
-              const form = e.target as HTMLFormElement
-
-              fetch('/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: encode({
-                  'form-name': 'contact',
-                  name: form.name.value,
-                  email: form.email.value,
-                  message: form.message.value,
-                }),
-              }).then(() => setSubmitted(true))
-                .catch(() => alert('Oops! There was a problem submitting your form.'))
-            }}
-            className="flex flex-col max-w-md w-full gap-4"
-          >
-            {/* Hidden input for Netlify */}
-            <input type="hidden" name="form-name" value="contact" />
-
+        <form
+          onSubmit={handleSubmit}
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          className="space-y-6"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <div>
+            <label htmlFor="name" className="block mb-1">Name</label>
             <input
-              type="text"
+              id="name"
               name="name"
+              type="text"
+              onChange={handleChange}
+              value={form.name}
               required
-              placeholder="Your Name"
-              className="p-3 rounded bg-gray-800 text-white"
+              className="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-purple-400"
             />
+          </div>
+          <div>
+            <label htmlFor="email" className="block mb-1">Email</label>
             <input
-              type="email"
+              id="email"
               name="email"
+              type="email"
+              onChange={handleChange}
+              value={form.email}
               required
-              placeholder="Your Email"
-              className="p-3 rounded bg-gray-800 text-white"
+              className="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-purple-400"
             />
+          </div>
+          <div>
+            <label htmlFor="message" className="block mb-1">Message</label>
             <textarea
+              id="message"
               name="message"
-              required
-              placeholder="Your Message"
               rows={5}
-              className="p-3 rounded bg-gray-800 text-white resize-none"
+              onChange={handleChange}
+              value={form.message}
+              required
+              className="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-purple-400"
             />
-            <button
-              type="submit"
-              className="bg-purple-600 hover:bg-purple-700 text-white py-3 rounded font-semibold transition"
-            >
-              Send Message
-            </button>
-          </form>
-        ) : (
-          <p className="mt-4 text-green-400">Thanks for your message! I’ll get back to you soon.</p>
-        )}
-      </main>
-    </>
-  )
-}
-
-// Helper to encode form data for Netlify
-function encode(data: Record<string, string>) {
-  return Object.keys(data)
-    .map(
-      (key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
-    )
-    .join('&')
+          </div>
+          <button
+            type="submit"
+            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 transition rounded text-white font-semibold"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
