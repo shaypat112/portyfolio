@@ -1,5 +1,7 @@
+// pages/awards-skills.tsx
 import Head from 'next/head'
-import { FaMedal, FaLaptopCode, FaCertificate, FaLanguage, FaTools } from 'react-icons/fa'
+import Link from 'next/link'
+import { FaMedal, FaLaptopCode, FaCertificate, FaLanguage, FaTools, FaRocket } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 
 export default function AwardsSkills() {
@@ -71,10 +73,19 @@ export default function AwardsSkills() {
           </motion.div>
 
           <motion.div variants={cardVariants}>
-            <Card title="Languages" icon={<FaLanguage className="text-purple-400 text-3xl" />}>
-              <li>English (Fluent)</li>
-              <li>Hindi (Conversational)</li>
-              <li>Spanish (Basic)</li>
+            <Card title="Project UCode NC" icon={<FaRocket className="text-orange-400 text-3xl" />}>
+              <li>
+                <Link
+                  href="https://n-cbigproject.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-purple-300 hover:underline"
+                >
+                  Visit the Project Site 🚀
+                </Link>
+              </li>
+              <li>Nonprofit teaching Python, Java & more</li>
+              <li>Volunteer-led club for young coders</li>
             </Card>
           </motion.div>
         </motion.div>
