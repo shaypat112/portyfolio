@@ -92,7 +92,7 @@ export default function About() {
             {/* Feature 6: Fun Fact Display */}
             {showFact && (
               <div className="mb-6 text-sm bg-purple-900/20 p-4 rounded-lg border border-purple-700 text-purple-300">
-                💡 Fun Fact: I once taught over 50 students how to code with Python in under a week!
+                💡 Fun Fact: I teach kids in Africa how to code python and other languages!
               </div>
             )}
 
@@ -126,12 +126,12 @@ export default function About() {
 
         {/* Feature 8: Testimonials */}
         <section className="mt-20 max-w-3xl mx-auto text-center italic text-gray-400">
-          “Shivang's passion for tech and leadership makes him stand out — he truly inspires others.”
+          “Shivang has a passion for tech and leadership makes him stand out — he truly inspires others.”
         </section>
 
         {/* Feature 9: Floating Footer */}
         <footer className="mt-24 text-center text-sm text-gray-500">
-          &copy; {new Date().getFullYear()} Shivang Patel — Built with ❤️ using Next.js + Tailwind.
+          &copy; {new Date().getFullYear()} Shivang Patel — Built using Next.js + Tailwind.
         </footer>
       </main>
     </>
